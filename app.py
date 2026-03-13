@@ -1,10 +1,32 @@
 import streamlit as st
 import pandas as pd
 
-# Title
+# ---------------------------
+# App Title
 st.title("PsyProAi - Predictive Autonomous Human-Centric Cyber Defense Platform")
 st.write("Upload sample emails/messages to see AI threat detection in action.")
 
+# ---------------------------
+# Sample CSV for judges to download
+sample_data = {
+    "content": [
+        "Please click here to update your account",
+        "Your password needs urgent reset",
+        "Meeting at 4 PM",
+        "Verify your email for account security",
+        "Lunch at 1 PM"
+    ]
+}
+sample_df = pd.DataFrame(sample_data)
+
+st.download_button(
+    label="Download Sample CSV",
+    data=sample_df.to_csv(index=False),
+    file_name="sample_emails.csv",
+    mime="text/csv"
+)
+
+# ---------------------------
 # Upload CSV file
 uploaded_file = st.file_uploader("Upload CSV with emails/messages", type="csv")
 
