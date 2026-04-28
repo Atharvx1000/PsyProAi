@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to HDFC Bank NetBanking</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+            color: #333;
+            font-size: 12px;
+        }
+        /* Top Red Accent Strip */
+        .top-strip {
+            background-color: #ed232a;
+            height: 4px;
+            width: 100%;
+        }
+        /* Main Header */
+        .header {
+            background-color: #ffffff;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            border-bottom: 2px solid #004c8f;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+        }
+        .logo-box {
+            background-color: #004c8f;
+            color: white;
+            font-weight: 900;
+            font-size: 28px;
+            padding: 5px 10px;
+            margin-right: 5px;
+            letter-spacing: 1px;
+        }
+        .logo-text {
+            color: #004c8f;
+            font-weight: bold;
+            font-size: 24px;
+            letter-spacing: 0.5px;
+        }
+        .logout-btn {
+            background-color: #ed232a;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        /* Sub Navigation */
+        .sub-nav {
+            background-color: #004c8f;
+            color: white;
+            padding: 8px 40px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        /* Main Content Container */
+        .main-content {
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        .transaction-box {
+            background-color: #ffffff;
+            width: 650px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .box-header {
+            background-color: #f7f7f7;
+            color: #004c8f;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .box-body {
+            padding: 30px;
+            text-align: center;
+        }
+        /* Loader Settings */
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #004c8f;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            animation: spin 1.2s linear infinite;
+            margin: 0 auto 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-title {
+            color: #004c8f;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .loading-sub {
+            color: #666;
+            font-size: 13px;
+        }
+        .security-alert {
+            background-color: #fff9e6;
+            border: 1px solid #ffcc00;
+            padding: 12px;
+            text-align: left;
+            margin-top: 30px;
+            font-size: 11px;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* Success Screen Settings */
+        #success-screen { display: none; }
+        .success-text {
+            color: #008000;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .receipt-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+        .receipt-table th, .receipt-table td {
+            border: 1px solid #e0e0e0;
+            padding: 10px 15px;
+        }
+        .receipt-table th {
+            background-color: #f9f9f9;
+            width: 45%;
+            color: #555;
+            font-weight: normal;
+        }
+        .receipt-table td {
+            font-weight: bold;
+            color: #333;
+        }
+        .amount-highlight {
+            color: #ed232a;
+            font-size: 14px;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .btn-blue {
+            background-color: #004c8f;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        .btn-gray {
+            background-color: #666;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #777;
+            font-size: 11px;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-strip"></div>
+
+    <div class="header">
+        <div class="logo-area">
+            <div class="logo-box">HDFC</div>
+            <div class="logo-text">BANK</div>
+        </div>
+        <div>
+            <span style="font-size: 12px; color: #666; margin-right: 15px;">Welcome, CUSTOMER</span>
+            <button class="logout-btn">LOGOUT</button>
+        </div>
+    </div>
+
+    <div class="sub-nav">
+        Funds Transfer > Third Party Transfer > Confirm Transaction
+    </div>
+
+    <div class="main-content">
+        <div class="transaction-box" id="loading-screen">
+            <div class="box-header">Processing Funds Transfer...</div>
+            <div class="box-body">
+                <div class="spinner"></div>
+                <div class="loading-title">Authorizing NEFT Payment</div>
+                <div class="loading-sub">Your transaction is being securely processed by HDFC Bank servers.<br><br><b>Please DO NOT refresh or close this window.</b></div>
+                
+                <div class="security-alert">
+                    <b>Important Security Message:</b> HDFC Bank Ltd. will NEVER ask you to reveal your User ID, Password, or OTP via email, SMS, or phone call. If you receive any such request, please report it immediately to reportphishing@hdfcbank.com.
+                </div>
+            </div>
+        </div>
+
+        <div class="transaction-box" id="success-screen">
+            <div class="box-header">Funds Transfer - Acknowledgment</div>
+            <div class="box-body">
+                <div class="success-text">✔ Transaction Successful</div>
+                
+                <table class="receipt-table">
+                    <tr>
+                        <th>Reference Number</th>
+                        <td>HDFCN8472910482</td>
+                    </tr>
+                    <tr>
+                        <th>Transfer Date & Time</th>
+                        <td id="tx-time">Loading...</td>
+                    </tr>
+                    <tr>
+                        <th>From Account</th>
+                        <td>XXXXXX4921</td>
+                    </tr>
+                    <tr>
+                        <th>Beneficiary Account</th>
+                        <td>XXXXXX8823</td>
+                    </tr>
+                    <tr>
+                        <th>Transfer Amount</th>
+                        <td class="amount-highlight">INR 50,000.00</td>
+                    </tr>
+                    <tr>
+                        <th>Remarks</th>
+                        <td>Urgent Transfer</td>
+                    </tr>
+                </table>
+
+                <div class="btn-group">
+                    <button class="btn-blue" onclick="window.print()">Download Advice</button>
+                    <button class="btn-gray">Make Another Transfer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        © Copyright HDFC Bank Ltd. All rights reserved.<br>
+        <span style="color: #aaa; font-size: 10px;">Terms and Conditions apply. Site best viewed in IE 11+, Google Chrome, Firefox.</span>
+    </div>
+
+    <script>
+        // Inject current exact date and time for realism
+        const now = new Date();
+        document.getElementById('tx-time').innerText = now.toLocaleString('en-IN');
+
+        // Spin the loading wheel for exactly 5 seconds, then show the official receipt
+        setTimeout(() => {
+            document.getElementById('loading-screen').style.display = 'none';
+            document.getElementById('success-screen').style.display = 'block';
+        }, 5000);
+    </script>
+
+</body>
+</html>
