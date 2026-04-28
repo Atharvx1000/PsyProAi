@@ -10,7 +10,7 @@ class LinguisticHeartbeat:
     def __init__(self):
         self.client = None
         # 🚀 1,000 Daily Requests & High Speed
-        self.model_id = "gemini-2.5-flash-lite" 
+        self.model_id = "gemini-2.5-flash" 
         
         try:
             if API_KEY:
